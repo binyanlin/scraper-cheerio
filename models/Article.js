@@ -15,7 +15,7 @@ const ArticleSchema = new Schema({
     type: Schema.Types.ObjectId,
     ref: "Note"
   },
-  photo: {
+  imageSrc: {
     type: String,
     required: true
   },
