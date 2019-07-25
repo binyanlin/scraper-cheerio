@@ -1,0 +1,50 @@
+<div class="row mt-1">
+  <div class="col-sm"></div>
+  <div class="col-sm text-center"><h1>BUN BURGER</h1></div>
+  <div class="col-sm"></div>
+</div>
+
+
+
+<div class="row mx-4 burgerRow ">
+  <div class="col-sm-5 text-center">
+    <h4 class="text-left">Uneaten Burgers</h4>
+    <div class="text-left uneatenHere">
+      {{#each uneaten}}
+      <li>ITEM: {{this.id}} ||
+      Burger: {{this.burger}}</li>
+      <img class="float left" src="/assets/img/burger-flat.png">
+      <button class="devour float right btn btn-dark text-light" value="{{this.id}}">Devour</button>
+      {{/each}}
+    </div>
+  </div>
+  <div class="col-sm-2">
+    <button class="btn btn-light seeAll"><a href="/select">See All Burgers</a></button>
+  </div>
+  <div class="col-sm-5 text-center">
+    <h4 class="text-right">Eaten Burgers</h4>
+    <div class="text-right eatenHere">
+      {{#each eaten}}
+       <li>ITEM: {{this.id}} ||
+      Burger: {{this.burger}}</li>
+      {{!-- <button class="float left btn btn-dark text-light" value="{{this.id}}">Order This</button> --}}
+      <img class="float right" src="/assets/img/burger-flat-invert.png">
+      {{/each}}
+    </div>
+  </div>
+</div>
+
+<div class="row menuRow">
+  <div class="col-sm"></div>
+  <div class="col-sm">
+    <form class="menu form-group" action="/insert" method="POST">
+      <h5 class="text-light">Order A Burger</h5>
+      <div class="row">
+      <input class="col-sm-10 form-control" name="burger" type="text">
+      <button class="col-sm-2 btn btn-warning text-center">Add</button>
+      </div>
+    </form>
+    
+  </div>
+  <div class="col-sm"></div>
+</div>

@@ -1,0 +1,37 @@
+<div class="row mt-1">
+  <div class="col-sm"></div>
+  <div class="col-sm text-center"><h1>Article Scraper</h1></div>
+  <div class="col-sm"></div>
+</div>
+
+{{!-- 
+{{#each articles}}
+<div id={{this.id}}>
+  <p>{{this.title}}</p>
+  <p>{{this.summary}}</p>
+  <p>{{this.link}}</p>
+  <p>{{this.photo}}</p>
+  <p>{{this.note}}</p>
+</div>
+{{/each}} --}}
+<div class="mx-5 container">
+
+{{#each articles}}
+    <div class="row">
+        <div class="col-md-3 col-sm-3 col-xs-1">
+            <img src="{{this.photo}}" style="width:100%">
+        </div>
+        <div class="col-md-7 col-sm-7 col-xs-10">
+            <h4>{{this.title}}</h4>
+            <h5>{{this.summary}}</h5>
+            <a href="{{this.link}}" target="_blank"><p>View Source</p></a>
+        </div>
+        <div class="col-md-2 col-sm-2 col-xs-1">
+            <button class="btn btn-danger" style="width:100%">Save Article</button><br><br>
+            <button class="btn btn-success" style="width:100%">Add Note</button>
+        </div>
+    </div>
+    <hr>
+{{/each}}
+
+</div>
