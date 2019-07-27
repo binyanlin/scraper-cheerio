@@ -1,27 +1,31 @@
 <div class="row mt-1">
   <div class="col-sm"></div>
-  <div class="col-sm text-center"><h1>Article Scraper</h1></div>
+  <div class="col-sm text-center">
+    <h1>Article Scraper</h1>
+  </div>
   <div class="col-sm"></div>
 </div>
 
 <div class="mx-5 container">
 
-{{#each articles}}
-    <div class="row">
-        <div class="col-md-3 col-sm-3 col-xs-1">
-            <img id="image{{this.id}}" src="{{this.imageSrc}}" style="width:100%">
-        </div>
-        <div class="col-md-7 col-sm-7 col-xs-10">
-            <h4 id="title{{this.id}}">{{this.title}}</h4>
-            <h5 id="summary{{this.id}}">{{this.summary}}</h5>
-            <a id="link{{this.id}}" href="{{this.link}}" target="_blank"><p>View Source</p></a>
-        </div>
-        <div class="col-md-2 col-sm-2 col-xs-1">
-            <button id="{{this.id}}" class="submit btn btn-danger" style="width:100%">Save Article</button><br><br>
-            <button id="{{this.id}}" class="addNote btn btn-success" style="width:100%">Add Note</button>
-        </div>
+  {{#each articles}}
+  <div class="row">
+    <div class="col-md-3 col-sm-3 col-xs-1">
+      <img id="image{{this.DOMId}}" src="{{this.imageSrc}}" style="width:100%">
     </div>
-    <hr>
-{{/each}}
+    <div class="col-md-7 col-sm-7 col-xs-10">
+      <h4 id="title{{this.DOMId}}">{{this.title}}</h4>
+      <h5 id="summary{{this.DOMId}}">{{this.summary}}</h5>
+      <a id="link{{this.DOMId}}" href="{{this.link}}" target="_blank">
+        <p>View Source</p>
+      </a>
+    </div>
+    <div class="col-md-2 col-sm-2 col-xs-1">
+      <button id="{{this.DOMId}}" class="submit btn btn-danger" style="width:100%">Save Article</button><br><br>
+      <button type="button" id="{{this.DOMId}}" data-toggle="modal" data-target="#modal{{this.id}}" class=" addNote btn btn-success" style="width:100%" disabled >Add Note</button>
+    </div>
+  </div>
+  <hr>
+  {{/each}}
 
 </div>

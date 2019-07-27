@@ -5,14 +5,17 @@ const axios = require("axios");
 const cheerio = require("cheerio")
 
 mongoose.connect("mongodb://localhost/scraper", {useNewUrlParser: true});
+mongoose.set("useFindAndModify", false);
 
 const models = {
   homePage: (req,res) => {
     res.render("index")
   },
+
   savedArticle: (req, res) => {
     res.render("saved")
   },
+
   showArticles: async (req, res) => {
     try {
       let articles = await Article.find()
@@ -21,9 +24,10 @@ const models = {
       console.log(e)
     }
   },
+
   scrapeArticles: (req, res) => {
     let articles = [];
-    let id = 0;
+    let DOMId = 0;
     axios.get("https://news.berkeley.edu/category/campuscommunity/events_at_berkeley/").then(function(response) {
             
             let $ = cheerio.load(response.data)
@@ -36,28 +40,49 @@ const models = {
                 result.link = $(this).find("a").attr("href");
                 result.summary = $(this).find("img").attr("alt");
                 result.imageSrc = $(this).find("img").attr("src");
-                result.id = id;
+                result.DOMId = DOMId;
                 // console.log(result);
                 articles.push(result);
-                id++
+                DOMId++
             })
         }).then(() => {
           res.render("index", {articles})
         });
     },
+
   saveArticle: (req, res) => {
     console.log("saveArticle was hit")
-    console.log(req.body);
     Article.create(req.body).then(res2 => {
-      console.log(res2)
       console.log("Added to database, check")
     }).catch(e => {
       console.log(e)
     })
+  },
 
-  }
+  saveNote: async (req, res) => {
+    console.log("saveNote models was hit")
+    try {
+      const newNote = await Note.create(req.body)
+      // console.log("newNote"+newNote);
+      // console.log("req title coming in" + req.body.title);
+      const article = await Article.findOneAndUpdate({title : req.body.title}, {$push:{note: newNote._id}}, {new:true});
+      console.log(article);
+      res.json(article);
+    } catch (e) {
+      res.json(e);
+    }
+  },
 
+  checkNote: async (req, res) => {
+    try {
+      const article = await Article.findOne({title : req.body.title}).populate("note");
+      // console.log("Article from get request backend "+ article)
+      res.json(article)
+    } catch (e) {
+      res.json(e)
+    }
   }
+}
 
 
 module.exports = {models};

@@ -22,6 +22,10 @@ const ArticleSchema = new Schema({
   summary: {
     type: String,
     required: true
+  },
+  DOMId: {
+    type: String,
+    required: true
   }
 });
 
