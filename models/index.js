@@ -12,17 +12,15 @@ const models = {
     res.render("index")
   },
 
-  savedArticle: (req, res) => {
-    res.render("saved")
-  },
-
-  showArticles: async (req, res) => {
+  savedArticle: async (req, res) => {
     try {
       let articles = await Article.find()
-      res.render("index", {articles});
-    } catch(e) {
+      console.log("Articles that were saved" + articles)
+      res.render("saved", {articles})
+    } catch (e) {
       console.log(e)
     }
+    
   },
 
   scrapeArticles: (req, res) => {
